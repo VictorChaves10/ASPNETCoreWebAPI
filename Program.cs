@@ -1,4 +1,5 @@
 using ASP.NETCore_WebAPI.Context;
+using ASP.NETCore_WebAPI.DTOs.Mappings;
 using ASP.NETCore_WebAPI.Filters;
 using ASP.NETCore_WebAPI.Repositories;
 using ASP.NETCore_WebAPI.Repositories.Interfaces;
@@ -15,7 +16,7 @@ builder.Services
 })
 .AddJsonOptions(options => {
 	options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-});
+}).AddNewtonsoftJson();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,6 +30,8 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
 
 builder.Services.AddScoped<ApiLogginFilter>();

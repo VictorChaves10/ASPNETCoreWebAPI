@@ -20,7 +20,7 @@ public class UnitOfWork : IUnitOfWork
     {
         get
         {
-            return _categoriaRepository = _categoriaRepository ?? new CategoriaRepository(_context); 
+            return _categoriaRepository ??= new CategoriaRepository(_context); 
         }
     }
 
@@ -28,7 +28,7 @@ public class UnitOfWork : IUnitOfWork
     {
         get 
         {
-            return _produtoRepository = _produtoRepository ?? new ProdutoRepository(_context);           
+            return _produtoRepository ??= new ProdutoRepository(_context);           
         }
     }
 
