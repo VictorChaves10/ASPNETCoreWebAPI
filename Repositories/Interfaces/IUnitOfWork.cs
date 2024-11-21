@@ -6,6 +6,6 @@
 
         IProdutoRepository ProdutoRepository { get; }
 
-        void Commit();
+        Task CommitAsync();
     }
 }
