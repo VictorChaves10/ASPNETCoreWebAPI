@@ -4,6 +4,7 @@ using ASP.NETCore_WebAPI.Filters;
 using ASP.NETCore_WebAPI.Pagination;
 using ASP.NETCore_WebAPI.Repositories.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using X.PagedList;
@@ -29,7 +30,7 @@ public class CategoriasController : ControllerBase
 
 
     [HttpGet]
-
+    [Authorize]
     [ServiceFilter(typeof(ApiLogginFilter))]
     public async Task<ActionResult<IEnumerable<CategoriaDTO>>> Get()
     {
@@ -112,6 +113,7 @@ public class CategoriasController : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Policy = "AdminOnly")]
     public async Task<ActionResult<CategoriaDTO>> Delete(int id)
     {
         var categoria = await _repository.CategoriaRepository.GetAsync(c => c.Id == id);
